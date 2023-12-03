@@ -1,52 +1,61 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, FlatList} from 'react-native';
+import { StyleSheet, View, ScrollView} from 'react-native';
 import { useState } from 'react';
-import mostrarProductosAgregados from './components/mostrarProductosAgregados';
-import listadoProductos from './components/listadoProductos';
+import ListadoProductos from './components/ListadoProductos';
+import MostrarProductosAgregados from './components/MostrarProductosAgregados';
 
 export default function App() {
-const [productosAgregados, setProductosAgregados] = useState('')
+const [productosAgregados, setProductosAgregados] = useState([])
 const products = [
   {
     id: '1', 
     nombre: 'Samsung Galaxy S23 256GB',
-    precio: 'U$D 600'
+    precio: ' U$D 600'
   } ,
   {
     id: '2',
     nombre: 'Samsung Galaxy S23+ 512GB',
-    precio: 'U$D 700'
-  }
+    precio: ' U$D 700'
+  },
+  {
+    id: '3', 
+    nombre: 'Samsung Galaxy A04s 128GB',
+    precio: ' U$D 120'
+  } ,
+  {
+    id: '4',
+    nombre: 'Samsung Galaxy M23 5G 128',
+    precio: ' U$D 870'
+  },
+  {
+    id: '5', 
+    nombre: 'Samsung Galaxy A04e 32GB',
+    precio: ' U$D 70'
+  } ,
+  {
+    id: '6',
+    nombre: 'Samsung Galaxy A34 128GB',
+    precio: ' U$D 270'
+  },
 ]
-
-const listadoProductos = () => {
-return (
- <>
- </>
-)}
 
 const agregarProducto = (product) => {
   setProductosAgregados([...productosAgregados, product])}
 
 const eliminarProducto = (item) => {
-  setProductosAgregados(productosAgregados.filter((product) =>product.id !== item.id))}
+  setProductosAgregados(productosAgregados.filter((product) => product !== item))}
 
-const mostrarProductosAgregados = ({item}) =>(
-<>
-
-</>
-)
 
   return (
     <>
     <View style={styles.container}>
     <StatusBar style="auto" />
-<listadoProductos
-
-/>
-<mostrarProductosAgregados
-
-/>
+<ListadoProductos
+productsData={products}
+agregarProductoAction={agregarProducto}/>
+<MostrarProductosAgregados
+mostrarProductos={productosAgregados}
+eliminarProductoAction={eliminarProducto}/>
 </View>
 </>
   )}
@@ -54,18 +63,9 @@ const mostrarProductosAgregados = ({item}) =>(
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
-  },
-  texto: {
-    flex: 2,
-    color: '#ff1cd6',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontSize: 29,
-    padding: 30
-
-  },
-
-});
+  backgroundColor: '#eaf3ff',
+paddingBottom: 20},
+  scrollView: {
+    marginHorizontal: 20,
+  },});
